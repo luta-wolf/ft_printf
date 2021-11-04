@@ -6,31 +6,33 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:50:36 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/03 22:52:08 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:55:39 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
+#include <stdio.h>
 
-int ft_argument(char c, int count)
+int ft_argument(char c,  va_list ap)
 {
-
+	int count;
 
 	if (c == 'c')
-		count += ft_prtint_c(ap);
-	 if (c == 's')
-	 	count += ft_putstr(s);
+		count = ft_print_c(ap);
+	if (c == 's')
+	 	count = ft_print_s(ap);
+ 	 if (c == 'd' || 'i')
+	  	count = ft_print_di(ap);
 	// if (c == 'p')
-	// 	count =
- 	if (c == 'd' || 'i')
-	 	count +=
+	//  	count = ft_print_p(ap);
 	// if (c == 'u')
-	// 	count =
-	// if (c == 'x' || 'X')
-	// 	count =
-	// if (c == '%')
-	// 	count =
+	//  	count = ft_print_u(ap);
+	//  if (c == 'x' || 'X')
+	//  	count = ft_print_x(ap, c);
+	 if (c == '%')
+	 	count = write(1, "%", 1);
+	return (count);
 }
 
 
@@ -51,13 +53,34 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			while(str[i] != *ft_strchr(istype, str[i]))
+			while(str[i])
+			{
+				if (ft_strchr(istype, str[i]))
+				{
+					count = ft_argument(str[i], ap);
+					break;
+				}
 				i++;
-			type = str[i];
+			}
 		}
-		ft_putchar(str[i]);
 		i++;
-		count++;
-
+//		count++;
 	}
+	return (count);
+}
+
+
+int main()
+{
+	int a;
+	char *b;
+	int x = 0xf;
+
+	b = "Hello my dear friend";
+
+	a = ft_printf("My fun Decimal:%s\n", b);
+	printf("%d\n", a);
+	a = printf("My fun Decimal:%s\n", b);
+	printf("%d\n", a);
+	return (0);
 }

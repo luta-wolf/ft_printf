@@ -6,7 +6,7 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:13:02 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/03 23:03:14 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:50:25 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	ft_putchar(char c)
 {
+	return (write(1, &c, 1));
+}
+
+int	ft_print_c(va_list	ap)
+{
+	char c;
+	c = va_arg(ap, int);
 	return (write(1, &c, 1));
 }
 
@@ -26,13 +33,15 @@ int	ft_strlen(const char *str)
 		i++;
 	return (i);
 }
-int ft_putstr(char *str)
+int ft_print_s(va_list ap)
 {
+	char *str;
+	str = va_arg(ap, char*);
 	write(1, str, ft_strlen(str));
 	return (ft_strlen(str));
 }
 
-void	ft_putnbr(int n)
+/*void	ft_putnbr(int n)
 {
 	char tmp;
 
@@ -42,7 +51,6 @@ void	ft_putnbr(int n)
 	{
 		if (n < 0)
 		{
-//			ft_putchar('-');
 			write(1, "-", 1);
 			n = n * -1;
 		}
@@ -50,9 +58,8 @@ void	ft_putnbr(int n)
 			ft_putnbr(n / 10);
 		tmp = (n % 10) + '0';
 		write (1, &tmp, 1);
-//		ft_putchar((n % 10) + '0');
 	}
-}
+}*/
 
 char	*ft_strchr(const char *str, int ch)
 {

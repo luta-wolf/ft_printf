@@ -6,7 +6,7 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:50:40 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/03 23:04:02 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:54:33 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ int		ft_putchar(char c);
 int		ft_strlen(const char *str);
 int		ft_putstr(char *str);
 char	*ft_strchr(const char *str, int ch);
+
+int		ft_print_s(va_list ap);
+int		ft_print_c(va_list ap);
+
 
 
 #endif
