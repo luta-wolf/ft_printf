@@ -6,14 +6,14 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:46:06 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/04 19:04:21 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/06 18:30:03 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 
-int	size_nbr(int n)
+int	ft_size_nbr(int n)
 {
 	int		len;
 	long	i;
@@ -50,10 +50,10 @@ void	ft_putnbr(long int n)
 
 }
 
-int	size_nbr_hex(unsigned int n)
+int	ft_size_nbr_hex(unsigned long long n)
 {
 	int				len;
-	unsigned int	i;
+	unsigned long long	i;
 
 	i = n;
 	len = 0;
@@ -67,23 +67,30 @@ int	size_nbr_hex(unsigned int n)
 	return (len);
 }
 
-void    ft_putnbr_hex(unsigned int n)
+void    ft_putnbr_hex(unsigned long long n, char c)
 {
     char	tmp;
 
+
     if (n >= 16)
-        ft_putnbr_hex(n / 16);
+        ft_putnbr_hex(n / 16, c);
     if ((n % 16) >= 0 && (n % 16) <= 9)
         tmp = n % 16 + '0';
-    else
+    else if (c == 'x')
        tmp = n % 16 + 'a' - 10;
+	else if (c == 'X')
+       tmp = n % 16 + 'A' - 10;
     write(1, &tmp, 1);
 }
 
-int ft_print_di(va_list	ap)
+int ft_print_di(va_list	ap, char a)
 {
-	int c;
-	c = va_arg(ap, int);
+	long int c;
+
+	if (a == 'd' || a == 'i')
+		c = va_arg(ap, int);
+	else
+		c = (unsigned int)va_arg(ap, int);
 	ft_putnbr(c);
-	return (size_n(c));
+	return (ft_size_nbr(c));
 }

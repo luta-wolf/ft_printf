@@ -6,7 +6,7 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:50:36 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/04 18:55:39 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/06 19:28:49 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,21 @@
 
 int ft_argument(char c,  va_list ap)
 {
-	int count;
+	int count = 0;
 
 	if (c == 'c')
 		count = ft_print_c(ap);
 	if (c == 's')
+	{
 	 	count = ft_print_s(ap);
- 	 if (c == 'd' || 'i')
-	  	count = ft_print_di(ap);
-	// if (c == 'p')
-	//  	count = ft_print_p(ap);
-	// if (c == 'u')
-	//  	count = ft_print_u(ap);
-	//  if (c == 'x' || 'X')
-	//  	count = ft_print_x(ap, c);
+		 printf("-|%d|-\n", count);
+	}
+ 	 if (c == 'd' || c == 'i' || c == 'u')
+	  	count = ft_print_di(ap, c);
+	 if (c == 'p')
+	  	count = ft_print_p(ap);
+	if (c == 'x' || c == 'X')
+	  	count = ft_print_x(ap, c);
 	 if (c == '%')
 	 	count = write(1, "%", 1);
 	return (count);
@@ -46,6 +47,7 @@ int	ft_printf(const char *str, ...)
 	char	type;
 
 	i = 0;
+	count = 0;
 	istype = "cspdiuxX%";
 	va_start(ap, str);
 	while(str[i])
@@ -57,15 +59,18 @@ int	ft_printf(const char *str, ...)
 			{
 				if (ft_strchr(istype, str[i]))
 				{
-					count = ft_argument(str[i], ap);
+					count += ft_argument(str[i], ap);
+					i++;
 					break;
 				}
 				i++;
 			}
 		}
+		write(1, &str[i], 1);
 		i++;
-//		count++;
+		count++;
 	}
+	printf("||%d||\n", count);
 	return (count);
 }
 
@@ -74,13 +79,22 @@ int main()
 {
 	int a;
 	char *b;
-	int x = 0xf;
+	char *c;
+	int d;
+	char e;
 
-	b = "Hello my dear friend";
+	a = 0;
+	d = -25558;
+	e = 'a';
+	b = "Hello my dear friend ";
 
-	a = ft_printf("My fun Decimal:%s\n", b);
-	printf("%d\n", a);
-	a = printf("My fun Decimal:%s\n", b);
+//	a = ft_printf("Myyy fun: %s %d %p %c %% \n", b, d, b, e);
+	a = ft_printf("Myyy fun: %s", b);
+//	printf("%d\n", a);
+	//ft_printf("\n");
+	a = 0;
+//	a = printf("Orig fun: %s %d %p %c %% \n", b, d, b, e);
+	a = printf("Orig fun: %s", b);
 	printf("%d\n", a);
 	return (0);
 }
