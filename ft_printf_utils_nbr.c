@@ -6,12 +6,11 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:46:06 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 04:05:49 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 04:18:50 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
 
 int	ft_size_nbr(int n)
 {
@@ -41,7 +40,6 @@ int	ft_size_nbr_u(unsigned int n)
 	long	i;
 
 	i = n;
-
 	len = 0;
 	while (i > 0)
 	{
@@ -56,6 +54,7 @@ int	ft_size_nbr_u(unsigned int n)
 
 void	ft_putnbr(long int n)
 {
+	char	tmp;
 
 	if (n < 0)
 	{
@@ -64,14 +63,13 @@ void	ft_putnbr(long int n)
 	}
 	if (n >= 10)
 		ft_putnbr(n / 10);
-	char tmp = n % 10 + '0';
+	tmp = n % 10 + '0';
 	write(1, &tmp, 1);
-
 }
 
 int	ft_size_nbr_hex(unsigned long long n)
 {
-	int				len;
+	int					len;
 	unsigned long long	i;
 
 	i = n;
@@ -86,19 +84,17 @@ int	ft_size_nbr_hex(unsigned long long n)
 	return (len);
 }
 
-void    ft_putnbr_hex(unsigned long long n, char c)
+void	ft_putnbr_hex(unsigned long long n, char c)
 {
-    char	tmp;
+	char	tmp;
 
-    if (n >= 16)
-        ft_putnbr_hex(n / 16, c);
-    if ((n % 16) >= 0 && (n % 16) <= 9)
-        tmp = n % 16 + '0';
-    else if (c == 'x')
-       tmp = n % 16 + 'a' - 10;
+	if (n >= 16)
+		ft_putnbr_hex(n / 16, c);
+	if ((n % 16) >= 0 && (n % 16) <= 9)
+		tmp = n % 16 + '0';
+	else if (c == 'x')
+		tmp = n % 16 + 'a' - 10;
 	else if (c == 'X')
-       tmp = n % 16 + 'A' - 10;
-    write(1, &tmp, 1);
+		tmp = n % 16 + 'A' - 10;
+	write(1, &tmp, 1);
 }
-
-
