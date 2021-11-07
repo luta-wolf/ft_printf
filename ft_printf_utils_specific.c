@@ -6,11 +6,19 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 00:06:40 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 04:22:05 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:53:40 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int	ft_print_c(va_list	ap)
+{
+	char	c;
+
+	c = va_arg(ap, int);
+	return (write(1, &c, 1));
+}
 
 int	ft_print_s(va_list ap)
 {
@@ -23,23 +31,18 @@ int	ft_print_s(va_list ap)
 	return (ft_strlen(str));
 }
 
-int	ft_print_di(va_list	ap)
+int	ft_print_di(va_list	ap, char type)
 {
 	long int	c;
 
-	c = va_arg(ap, int);
+	if (type == 'u')
+		c = (unsigned int)va_arg(ap, int);
+	else
+		c = va_arg(ap, int);
 	ft_putnbr(c);
 	return (ft_size_nbr(c));
 }
 
-int	ft_print_u(va_list	ap)
-{
-	unsigned int	c;
-
-	c = va_arg(ap, unsigned int);
-	ft_putnbr_u(c);
-	return (ft_size_nbr_u(c));
-}
 
 int	ft_print_x(va_list	ap, char type)
 {

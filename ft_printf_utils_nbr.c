@@ -6,13 +6,13 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:46:06 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 04:18:50 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 16:52:11 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_size_nbr(int n)
+int	ft_size_nbr(long int n)
 {
 	int		len;
 	long	i;
@@ -32,24 +32,6 @@ int	ft_size_nbr(int n)
 		return (1);
 	else
 		return (len + 1);
-}
-
-int	ft_size_nbr_u(unsigned int n)
-{
-	int		len;
-	long	i;
-
-	i = n;
-	len = 0;
-	while (i > 0)
-	{
-		i = i / 10;
-		len++;
-	}
-	if (n > 0)
-		return (len);
-	else
-		return (1);
 }
 
 void	ft_putnbr(long int n)

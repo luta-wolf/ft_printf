@@ -6,13 +6,13 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:50:36 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 04:31:32 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 17:02:51 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_argument(char type, va_list ap)
+int	specific(char type, va_list ap)
 {
 	int	count;
 
@@ -21,10 +21,8 @@ int	ft_argument(char type, va_list ap)
 		count = ft_print_c(ap);
 	else if (type == 's')
 		count = ft_print_s(ap);
-	else if (type == 'd' || type == 'i')
-		count = ft_print_di(ap);
-	else if (type == 'u')
-		count = ft_print_u(ap);
+	else if (type == 'd' || type == 'i' || type == 'u')
+		count = ft_print_di(ap, type);
 	else if (type == 'x' || type == 'X')
 		count = ft_print_x(ap, type);
 	else if (type == 'p')
@@ -34,17 +32,13 @@ int	ft_argument(char type, va_list ap)
 	return (count);
 }
 
-int	ft_printf(const char *str, ...)
+void	ft_count(va_list ap, char *str, int *count)
 {
-	va_list	ap;
 	int		i;
-	int		count;
 	char	*istype;
 
-	i = 0;
-	count = 0;
 	istype = "cspdiuxX%";
-	va_start(ap, str);
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -54,12 +48,22 @@ int	ft_printf(const char *str, ...)
 				i++;
 			if (!str[i])
 				break ;
-			count += ft_argument(str[i], ap);
+			*count += specific(str[i], ap);
 		}
 		else
-			count += write(1, &str[i], 1);
+			*count += write(1, &str[i], 1);
 		i++;
 	}
+}
+
+int	ft_printf(const char *str, ...)
+{
+	va_list	ap;
+	int		count;
+
+	count = 0;
+	va_start(ap, str);
+	ft_count(ap, (char *)str, &count);
 	va_end(ap);
 	return (count);
 }
