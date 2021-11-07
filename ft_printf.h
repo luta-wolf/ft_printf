@@ -6,7 +6,7 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:50:40 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 16:54:18 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 19:19:54 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,13 @@
 # include <stdarg.h>
 # include <unistd.h>
 
-typedef struct s_flags
-{
-	int		f_minus;
-	int		f_plus;
-	int		f_zero;
-	int		f_space;
-	int		f_octothorpe;
-	int		count;
-	int		i;
-	char	*type;
-}			t_flags;
-
 int		ft_printf(const char *str, ...);
-
-//utils nbr
-int		ft_size_nbr(long int n);
-void	ft_putnbr(long int n);
 //utils str
 int		ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int ch);
+//utils nbr
+int		ft_size_nbr(long int n);
+void	ft_putnbr(long int n);
 int		ft_size_nbr_hex(unsigned long long n);
 void	ft_putnbr_hex(unsigned long long n, char c);
 //utils specific
