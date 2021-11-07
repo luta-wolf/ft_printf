@@ -1,4 +1,3 @@
-# имя выходного файла
 NAME	=	libftprintf.a
 
 SRCS	=	ft_printf.c \
@@ -6,28 +5,28 @@ SRCS	=	ft_printf.c \
 			ft_printf_utils_nbr.c \
 			ft_printf_utils_specific.c
 
-OBJ		=	$(SRCS:%.c=%.o)
-
 HEADER	=	ft_printf.h
 
-FLAGS	=	-Wall -Wextra - Werror
+FLAGS	=	-Wall -Werror -Wextra -I.
 
-CC		= 	gcc
+OBJ		=	$(SRCS:%.c=%.o)
+
+CC		=	gcc
 
 .PHONY	:	all clean fclean re
 
-all		:	$(NAME)
-
 $(NAME)	:	$(OBJ)
-			ar r $(NAME) $^
+			ar r $(NAME) $?
 
 %.o		:	%.c $(HEADER)
-			$(CC) $(FLAFS) -c $(SRCS)
+			$(CC) $(FLAGS) -c $< -o $@
+
+all		:	$(NAME)
 
 clean	:
-			@rm -rf $(OBJ) $(OBJ_B)
+			rm -rf $(OBJ)
 
 fclean	:	clean
-			@rm -rf $(NAME)
+			rm -rf  $(NAME)
 
 re		:	fclean all
