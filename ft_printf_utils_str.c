@@ -6,7 +6,7 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 23:13:02 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 16:53:32 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 17:25:35 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,3 @@ char	*ft_strchr(const char *str, int ch)
 		return ((char *)str);
 	return (NULL);
 }
-
-

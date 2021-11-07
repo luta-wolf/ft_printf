@@ -6,7 +6,7 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 00:06:40 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/07 16:53:40 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/07 17:25:15 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ft_print_di(va_list	ap, char type)
 	ft_putnbr(c);
 	return (ft_size_nbr(c));
 }
-
 
 int	ft_print_x(va_list	ap, char type)
 {
