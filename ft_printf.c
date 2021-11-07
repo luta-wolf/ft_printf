@@ -6,37 +6,31 @@
 /*   By: einterdi <einterdi@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/29 18:50:36 by einterdi          #+#    #+#             */
-/*   Updated: 2021/11/06 19:28:49 by einterdi         ###   ########.fr       */
+/*   Updated: 2021/11/06 23:06:23 by einterdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
-#include <stdio.h>
 
-int ft_argument(char c,  va_list ap)
+int	ft_argument(char type,  va_list ap)
 {
 	int count = 0;
 
-	if (c == 'c')
+	if (type == 'c')
 		count = ft_print_c(ap);
-	if (c == 's')
-	{
+	else if (type == 's')
 	 	count = ft_print_s(ap);
-		 printf("-|%d|-\n", count);
-	}
- 	 if (c == 'd' || c == 'i' || c == 'u')
-	  	count = ft_print_di(ap, c);
-	 if (c == 'p')
+ 	else if (type == 'd' || type  == 'i' || type  == 'u')
+	  	count = ft_print_diu(ap, type);
+	else if (type == 'p')
 	  	count = ft_print_p(ap);
-	if (c == 'x' || c == 'X')
-	  	count = ft_print_x(ap, c);
-	 if (c == '%')
-	 	count = write(1, "%", 1);
+	else if (type == 'x' || type  == 'X')
+	  	count = ft_print_x(ap, type);
+	else
+		count = write(1, &type, 1);
 	return (count);
 }
-
-
 
 int	ft_printf(const char *str, ...)
 {
@@ -44,7 +38,6 @@ int	ft_printf(const char *str, ...)
 	int 	i;
 	int 	count;
 	char 	*istype;
-	char	type;
 
 	i = 0;
 	count = 0;
@@ -55,46 +48,16 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			while(str[i])
-			{
-				if (ft_strchr(istype, str[i]))
-				{
-					count += ft_argument(str[i], ap);
-					i++;
-					break;
-				}
+			while(!ft_strchr(istype, str[i]) && str[i])
 				i++;
-			}
+			if(!str[i])
+				break ;
+			count += ft_argument(str[i], ap);
 		}
-		write(1, &str[i], 1);
+		else
+			count += write(1, &str[i], 1);
 		i++;
-		count++;
 	}
-	printf("||%d||\n", count);
+	va_end(ap);
 	return (count);
-}
-
-
-int main()
-{
-	int a;
-	char *b;
-	char *c;
-	int d;
-	char e;
-
-	a = 0;
-	d = -25558;
-	e = 'a';
-	b = "Hello my dear friend ";
-
-//	a = ft_printf("Myyy fun: %s %d %p %c %% \n", b, d, b, e);
-	a = ft_printf("Myyy fun: %s", b);
-//	printf("%d\n", a);
-	//ft_printf("\n");
-	a = 0;
-//	a = printf("Orig fun: %s %d %p %c %% \n", b, d, b, e);
-	a = printf("Orig fun: %s", b);
-	printf("%d\n", a);
-	return (0);
 }
